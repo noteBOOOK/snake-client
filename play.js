@@ -1,5 +1,5 @@
 const net = require("net");
-const connect = require("./client");
+const {connect} = require("./client");
 
 /*
  * Setup user Interface
@@ -21,7 +21,6 @@ const setupInput = function() {
   })
   return stdin;
 };
-
 
 
 console.log("Connecting...");
