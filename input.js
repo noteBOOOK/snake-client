@@ -1,4 +1,5 @@
 let connection; 
+const {IP, PORT, chatLog, movement} = require("./constants")
 
 const setupInput = function(conn) {
   connection = conn;
@@ -13,30 +14,13 @@ const setupInput = function(conn) {
     };
   });
   stdin.on("data", (key) => {
-    if (key === "w") {
-      connection.write("Move: up");
-    } else if (key === "s") {
-      connection.write("Move: down");
-    } else if (key === "a") {
-      connection.write("Move: left");
-    } else if (key === "d") {
-      connection.write("Move: right");
-    }
+    if (key in movement) {
+      connection.write(movement[key]);
+    };
   });
   stdin.on("data", (key) => {
-    if (key === "g") {
-      connection.write("Say: I'm the best around");
-    } else if (key === "h") {
-      connection.write("Say: Nothing's gonna ever keep me down");
-    } else if (key === "j") {
-      connection.write("Say: gonna keep me down");
-    }
-  });
-  stdin.on("data", (key) => {
-    if (key === "b") {
-      connection.write("Say: What is this")
-    } else if (key === "n") {
-      connection.write("Say: a server for snakes?");
+    if (key in chatLog) {
+      connection.write(chatLog[key]);
     }
   })
   return stdin;
